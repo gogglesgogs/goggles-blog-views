@@ -9,9 +9,9 @@ export function onRequest(context) {
   const format = context.params.img[0];
   const size = context.params.img[1];
   
-  if (!formats.include(format)) 
-    return response(`Invalid formar: ${format}`, 400);
-  if (!formats.include(size))
+  if (!formats.includes(format)) 
+    return response(`Invalid format: ${format}`, 400);
+  if (!formats.includes(size))
     return response(`Invalid size: ${size}`, 400);
   
   return response(`goggles-${format}-${size}.${format}`, 200);
