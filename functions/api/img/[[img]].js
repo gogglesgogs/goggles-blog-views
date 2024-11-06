@@ -9,7 +9,7 @@ export function onRequest(context) {
   console.log(JSON.stringify(context))
 
   if (!context.params.img) 
-    return response(`Error!`)
+    return response(`Error!`, 400)
   
   const format = context.params.img[0];
   const size = context.params.img[1];
