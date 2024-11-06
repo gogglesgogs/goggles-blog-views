@@ -7,6 +7,9 @@ function response(res, code) {
   
 export function onRequest(context) {
   console.log(JSON.stringify(context))
+
+  if (!context.params.img) 
+    return response(`Error!`)
   
   const format = context.params.img[0];
   const size = context.params.img[1];
@@ -15,7 +18,7 @@ export function onRequest(context) {
   console.log(size, typeof size);
   
   if (!format || !size)
-    return response(`Please provide format and size. Available formats: ${formats}. Available sizes: ${sizes}.`)
+    return response(`Please provide format and size. Available formats: ${formats}. Available sizes: ${sizes}.`, 400)
   if (!formats.includes(format)) 
     return response(`Invalid format: ${format}.`, 400);
   if (!formats.includes(size))
