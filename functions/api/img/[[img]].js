@@ -1,25 +1,54 @@
 const formats = ["png", "jpg", "webp", "avif"];
 const sizes = ["32", "64", "128", "196", "256", "300", "400", "500"];
+const valid_params = {
+  formats: formats,
+  sizes: sizes,
+};
 
 function response(res, code) {
-  return new Response(JSON.stringify(res, { status: code }))
+  return new Response(JSON.stringify(res, { status: code }));
 };
   
 export function onRequest(context) {
   if (!context.params.img) 
-    return response(`Please provide /format and /size. Available formats: ${formats}. Available sizes: ${sizes}.`, 400);
+    return response({
+      error: 'Please provide /format and /size',
+      valid_params,
+    }, 400);
   
   const format = context.params.img[0];
   const size = context.params.img[1];
   
-  if (!format || !size)
-    return response(`Please provide /format and /size. Available formats: ${formats}. Available sizes: ${sizes}.`, 400);
+  if (!format)
+    return response({ 
+      error: 'Please provide /format',
+      valid_params,
+    }, 400);
+
+  if (!size)
+    return response({
+      error: 'Please provide /size',
+      valid_params,
+    }, 400);
   
   if (!formats.includes(format)) 
-    return response(`Invalid format: ${format}.`, 400);
+    return response({
+      error: `Invalid format: ${format}`,
+      valid_params,
+    }, 400);
   
   if (!formats.includes(size))
-    return response(`Invalid size: ${size}.`, 400);
+    return response({
+      error: `Invalid size: ${size}`,
+      valid_params,
+      // tmp
+      type: typeof size,
+    }, 400);
   
-  return response({image: `goggles-${format}-${size}.${format}`}, 200);
+  return response({
+    url: `http://goggles.pages.dev/image/goggles-${format}-${size}.${format}`,
+    format: format,
+    size: size,
+    valid_params,
+  }, 200);
 }
