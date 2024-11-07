@@ -1,4 +1,4 @@
-export function onRequest(context) {
+export async function onRequest(context) {
   return new Response(JSON.stringify({
     data: JSON.stringify(context),
     env: `Hello ${context.env.hello}`,
