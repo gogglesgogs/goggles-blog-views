@@ -15,12 +15,7 @@
             padding: 1rem; 
             margin: 2rem 0px; 
             background-color: #f9f9f9;
-        } 
-        .string { color: green; } 
-        .number { color: neutral; } 
-        .boolean { color: blue; } 
-        .null { color: red; } 
-        .key { color: gray; }
+        }
     </style>
 </head>
 <body>
@@ -51,10 +46,10 @@
                     return response.text();
                 }
                 .then(data => {
-                    result.innerHTML = data;
+                    result.textContent= data;
                 })
                 .catch(error => {
-                    result.innerHTML = 'Failed to fetch content: ' + error.message;
+                    result.textContent = 'Failed to fetch content: ' + error.message;
                 });
         }
 
