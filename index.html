@@ -38,7 +38,8 @@
             fetch(input.value)
                 .then(response => {
                     if (!response.ok) throw new Error('Network response was not ok');
-                    if (response.headers.get('Content-Type') === 'application/json') return response.json();
+                    if (response.headers.get('Content-Type') === 'application/json') 
+                        return response.text() + "json";
                     return response.text();
                 })
                 .then(data => {
