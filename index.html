@@ -17,7 +17,7 @@
             background-color: #f9f9f9;
         } 
         .string { color: green; } 
-        .number { color: darkorange; } 
+        .number { color: neutral; } 
         .boolean { color: blue; } 
         .null { color: red; } 
         .key { color: gray; }
@@ -46,28 +46,30 @@
 
             fetch(input.value)
                 .then(response => {
-                    if (!response.ok) 
-                        throw new Error('Network response was not ok');
-                    if (response.headers.get('Content-Type') === 'application/json') {
-                        response = response.text().replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); 
-                        return response.text().replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
-                            var cls = 'number'; 
-                            if (/^"/.test(match)) { 
-                                if (/:$/.test(match)) { 
-                                    cls = 'key'; 
-                                } else { 
-                                    cls = 'string';
-                                }
-                            } else if (/true|false/.test(match)) { 
-                                cls = 'boolean'; 
-                            } else if (/null/.test(match)) { 
-                                cls = 'null'; 
-                            } return '<span class="' + cls + '">' + match + '</span>'; })
-                    };
-                    return response.text();
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    if (response.headers.get('Content-Type') === 'application/json') return { text: response.text(), isJson: true };
+                    return { text: response.text(), isJson: false };
                 })
                 .then(data => {
-                    result.innerHTML = data;
+                    if (!data.isJson) result.innerHTML = data.text;
+
+                    let tmp = data.text;
+                    tmp = tmp.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); 
+                    tmp = tmp.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+                    let cls = 'number'; 
+                    if (/^"/.test(match)) { 
+                        if (/:$/.test(match)) { 
+                            cls = 'key'; 
+                        } else { 
+                            cls = 'string';
+                        }
+                    } else if (/true|false/.test(match)) { 
+                        cls = 'boolean'; 
+                    } else if (/null/.test(match)) { 
+                        cls = 'null'; 
+                    }
+                    
+                    result.innerHTMl = '<span class="' + cls + '">' + match + '</span>'; })
                 })
                 .catch(error => {
                     result.innerHTML = 'Failed to fetch content: ' + error.message;
