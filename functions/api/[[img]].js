@@ -1,5 +1,5 @@
 const formats = ["png", "jpg", "webp", "avif"];
-const sizes = [32, 64, 128, 196, 256, 320, 400", 500];
+const sizes = [32, 64, 128, 196, 256, 320, 400, 500];
 const valid_params = {
   formats: formats,
   sizes: sizes,
