@@ -1,5 +1,5 @@
 const formats = ["png", "jpg", "webp", "avif"];
-const sizes = ["32", "64", "128", "196", "256", "300", "400", "500"];
+const sizes = [32, 64, 128, 196, 256, 320, 400", 500];
 const valid_params = {
   formats: formats,
   sizes: sizes,
@@ -17,7 +17,7 @@ export function onRequest(context) {
     }, 400);
   
   const format = context.params.img[0];
-  const size = context.params.img[1];
+  const size = parseInt(context.params.img[1]);
   
   if (!format)
     return response({ 
@@ -37,12 +37,10 @@ export function onRequest(context) {
       valid_params,
     }, 400);
   
-  if (!formats.includes(size))
+  if (!sizes.includes(size))
     return response({
       error: `Invalid size: ${size}`,
       valid_params,
-      // tmp
-      type: typeof size,
     }, 400);
   
   return response({
