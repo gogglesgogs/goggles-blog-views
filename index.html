@@ -21,7 +21,7 @@
     </style>
 </head>
 <body>
-    <h1>Goggles's Playground</h1>
+    <h1>Goggles's API Playground</h1>
     <p>Try fetching https://gogsplayground.pages.dev/api</p>
     <input type="text" id="urlInput" placeholder="Enter URL here" style="width: 300px;">
     <button onclick="fetchContent()">Fetch</button>
@@ -29,12 +29,12 @@
     <div id="result"></div>
 
     <script>
+        const input = document.getElementById('urlInput');
+        const result = document.getElementById('result');
         function fetchContent() {
-            const url = document.getElementById('urlInput').value;
-            const resultDiv = document.getElementById('result');
-            resultDiv.textContent = 'Loading...';
+            result.textContent = 'Loading...';
 
-            fetch(url)
+            fetch(input.value)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -42,12 +42,15 @@
                     return response.text();
                 })
                 .then(data => {
-                    resultDiv.textContent = data;
+                    result.textContent = data;
                 })
                 .catch(error => {
-                    resultDiv.textContent = 'Failed to fetch content: ' + error.message;
+                    result.textContent = 'Failed to fetch content: ' + error.message;
                 });
         }
+
+        input.value = 'https://gogsplayground.pages.dev/LICENSE';
+        fetchContent();
     </script>
 </body>
 </html>
