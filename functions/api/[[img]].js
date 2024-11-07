@@ -19,7 +19,8 @@ function response(res) {
 export function onRequest(context) {
   if (!context.params.img) 
     return response({
-      error: 'Please provide /format and /size',
+      status: 400,
+      message: 'Please provide /format and /size',
       valid_params,
     });
   
@@ -28,32 +29,40 @@ export function onRequest(context) {
   
   if (!format)
     return response({ 
-      error: 'Please provide /format',
+      status: 400,
+      message: 'Please provide /format',
       valid_params,
     });
 
   if (!size)
     return response({
-      error: 'Please provide /size',
+      status: 400,
+      message: 'Please provide /size',
       valid_params,
     });
   
   if (!formats.includes(format)) 
     return response({
-      error: `Invalid format: ${format}`,
+      status: 400,
+      message: `Invalid format: ${format}`,
       valid_params,
     });
   
   if (!sizes.includes(size))
     return response({
-      error: `Invalid size: ${size}`,
+      status: 400,
+      message: `Invalid size: ${size}`,
       valid_params,
     });
+
+  if (format == 'jpg') format = 'jpeg';
   
   return response({
     url: `http://goggles.pages.dev/image/goggles-${format}-${size}.${format}`,
+    image: `data:image/${format};base64,{PLACEHOLDER}`,
     format: format,
-    size: size,
+    height: size,
+    width: size,
     valid_params,
   });
 }
