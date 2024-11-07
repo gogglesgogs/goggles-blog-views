@@ -23,17 +23,16 @@
 <body>
     <h1>Goggles's API Playground</h1>
     <p>Try fetching https://gogsplayground.pages.dev/api</p>
-    <input type="text" id="urlInput" placeholder="Enter URL here" style="width: 300px;">
-    <button onclick="fetchContent()">Fetch</button>
+    <input type="text" id="url" placeholder="Enter URL here" style="width: 300px;">
+    <button onclick="Fetch()">Fetch</button>
 
     <div id="result"></div>
 
-    <a href="#" style="border-left: 4px solid gray; padding: 2px 1rem;">@gogglesgogs</a>
-
     <script>
-        const input = document.getElementById('urlInput');
+        const input = document.getElementById('url');
         const result = document.getElementById('result');
-        function fetchContent() {
+        
+        function Fetch() {
             result.textContent = 'Loading...';
 
             fetch(input.value)
@@ -52,7 +51,7 @@
         }
 
         input.value = 'https://gogsplayground.pages.dev/LICENSE';
-        fetchContent();
+        Fetch();
     </script>
 </body>
 </html>
