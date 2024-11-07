@@ -6,7 +6,7 @@ const valid_params = {
 };
 
 function response(res, code) {
-  return new Response(JSON.stringify(res, { status: code }));
+  return new Response(JSON.stringify(res, null, 4), { status: code });
 };
   
 export function onRequest(context) {
