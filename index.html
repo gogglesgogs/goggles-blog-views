@@ -48,7 +48,7 @@
                     result.textContent = data;
                 })
                 .catch(error => {
-                    result.textContent = error.status;
+                    result.textContent = 'Failed to fetch content: ' + error.message;
                 });
         }
 
