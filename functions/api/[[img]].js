@@ -24,8 +24,8 @@ export function onRequest(context) {
       valid_params,
     });
   
-  const format = context.params.img[0];
-  const size = parseInt(context.params.img[1]);
+  let format = context.params.img[0];
+  let size = parseInt(context.params.img[1]);
   
   if (!format)
     return response({ 
