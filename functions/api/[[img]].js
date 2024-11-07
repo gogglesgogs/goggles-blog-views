@@ -6,7 +6,14 @@ const valid_params = {
 };
 
 function response(res) {
-  return new Response(JSON.stringify(res, null, 2));
+  return new Response(
+    JSON.stringify(res, null, 2), 
+    {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+  );
 };
   
 export function onRequest(context) {
