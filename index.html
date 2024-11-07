@@ -23,7 +23,7 @@
 <body>
     <h1>Goggles's API Playground</h1>
     <p>Try fetching https://gogsplayground.pages.dev/api</p>
-    <form style="display: flex; gap: 1rem;">
+    <form style="display: flex; gap: 1rem;" onsubmit="(e) => e.preventDefault()">
         <textarea type="url" id="url" placeholder="Enter URL here" cols="50" style="resize: none;" required autofocus></textarea>
         <button onclick="Fetch()">Fetch</button>
     </form>
