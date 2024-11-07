@@ -1,11 +1,52 @@
-<!DOCTYPE html>
-<html>
-  <head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Goggles's Playground</title>
-  </head>
-  <body>
-    <p style="height: 100vh; line-height: 100vh; text-align: center; font-size: 3rem; font-family: monospace;">
-      Goggles's Playground. Go to <a href="/api">/api/</a>
-    </p>
-  </body>
+    <style>
+        body {
+            font-family: monospace;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fetch URL Content</h1>
+    <input type="text" id="urlInput" placeholder="Enter URL here" style="width: 300px;">
+    <button onclick="fetchContent()">Fetch Content</button>
+
+    <div id="result"></div>
+
+    <script>
+        function fetchContent() {
+            const url = document.getElementById('urlInput').value;
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = 'Loading...';
+
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    resultDiv.textContent = data;
+                })
+                .catch(error => {
+                    resultDiv.textContent = 'Failed to fetch content: ' + error.message;
+                });
+        }
+    </script>
+</body>
 </html>
