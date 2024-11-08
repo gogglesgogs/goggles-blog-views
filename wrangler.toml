@@ -1,4 +1,5 @@
 name = "gogsplayground"
 pages_build_output_dir = "./"
 
+compatibility_date = "2021-09-14"
 compatibility_flags = [ "nodejs_compat" ]
