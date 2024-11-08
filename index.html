@@ -11,10 +11,12 @@
             padding-right: 1rem;
         }
         #result {
-            border: 1px solid #ddd; 
-            padding: 1rem; 
-            margin: 2rem 0px; 
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
             background-color: #f9f9f9;
+            white-space: pre-wrap;
+            word-wrap: break-word;
         }
     </style>
 </head>
@@ -26,7 +28,7 @@
         <button onclick="Fetch()">Fetch</button>
     </div>
 
-    <pre id="result"></pre>
+    <div id="result"></div>
 
     <script>
         const input = document.getElementById('url');
