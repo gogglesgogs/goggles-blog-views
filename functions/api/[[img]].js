@@ -72,6 +72,7 @@ export function onRequest(context) {
     format: format,
     height: size,
     width: size,
+    imageAsset,
     type: typeof imageAsset,
     valid_params,
   });
