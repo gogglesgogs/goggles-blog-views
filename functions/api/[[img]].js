@@ -65,15 +65,15 @@ export function onRequest(context) {
     status: 500,
     message: `Image asset doesnt exist: ${image}`,
   })
+
+  let imageBase64 = Buffer.from(imageAsset).toString('base64');
   
   return response({
     url: `http://goggles.pages.dev/image/${image}`,
-    image: `data:image/${format};base64,{PLACEHOLDER}`,
+    image: `data:image/${format};base64,${imageBase64}`,
     format: format,
     height: size,
     width: size,
-    imageAsset,
-    type: typeof imageAsset,
     valid_params,
   });
 }
