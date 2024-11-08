@@ -19,7 +19,7 @@ function response(res) {
 function getImage(image) {
   let str = '';
   try {
-    fetch(`/images/${image}`)
+    fetch(`https://gogsplayground.pages.dev/images/${image}`)
       .then(res => response.arrayBuffer())
       .then(data => str = data.toString('base64'));
     return str
