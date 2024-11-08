@@ -16,18 +16,6 @@ function response(res) {
   );
 };
 
-function getImage(image) {
-  let str = '';
-  try {
-    fetch(`https://gogsplayground.pages.dev/images/${image}`)
-      .then(res => response.arrayBuffer())
-      .then(data => str = data.toString('base64'));
-    return str
-  } catch (err) {
-    return null
-  }
-};
-
 async function getImage(image) {
   try {
     const response = await fetch(`https://gogsplayground.pages.dev/images/${image}`);
