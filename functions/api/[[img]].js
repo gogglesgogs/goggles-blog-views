@@ -16,7 +16,7 @@ function response(res) {
   );
 };
   
-export function onRequest(context) {
+export async function onRequest(context) {
   if (!context.params.img) 
     return response({
       status: 400,
@@ -59,18 +59,23 @@ export function onRequest(context) {
 
   let image = `goggles-${format}-${size}.${format}`;
 
-  let imageAsset = context.env.ASSETS.fetch(`/images/${image}`);
-
-  if (!imageAsset) return response({
-    status: 500,
-    message: `Image asset doesnt exist: ${image}`,
-  })
-
-  let imageBase64 = btoa(imageAsset);
+  try {
+    let response = await fetch('/images/${}'); 
+    let buffer = await response.buffer(); 
+    let base64Image = buffer.toString('base64'); 
+  } catch (err) {
+    return response({
+      status: 500,
+      message: `Failed to fetch image: ${image}`,
+      error: err,
+      valid_params,
+    });
+  }
+  
   
   return response({
-    url: `http://goggles.pages.dev/image/${image}`,
-    image: `data:image/${format};base64,${imageBase64}`,
+    url: `http://gogsplayground.pages.dev/images/${image}`,
+    image: `data:image/${format};base64,${base64str}`,
     format: format,
     height: size,
     width: size,
