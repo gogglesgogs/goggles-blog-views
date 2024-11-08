@@ -66,13 +66,7 @@ export function onRequest(context) {
     message: `Image asset doesnt exist: ${image}`,
   })
 
-  let imageBase64;
-
-  if (!Buffer) {
-    imageBase64 = btoa(imageAsset);
-  } else {
-    imageBase64 = Buffer.from(imageAsset).toString('base64');
-  }
+  let imageBase64 = btoa(imageAsset);
   
   return response({
     url: `http://goggles.pages.dev/image/${image}`,
