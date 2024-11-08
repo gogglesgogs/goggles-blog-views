@@ -59,7 +59,7 @@ export function onRequest(context) {
 
   let image = `goggles-${format}-${size}.${format}`;
 
-  let imageAsset = env.ASSETS.fetch(`/images/${image}`);
+  let imageAsset = context.env.ASSETS.fetch(`/images/${image}`);
 
   if (!imageAsset) return response({
     status: 500,
