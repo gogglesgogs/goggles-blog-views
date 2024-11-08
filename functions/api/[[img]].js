@@ -15,6 +15,16 @@ function response(res) {
     }
   );
 };
+
+async function getImage(image) {
+  try {
+    fetch(`/images/${image}`)
+      .then(res => response.buffer())
+      .then(data => return data.toString('base64'));
+  } catch (err) {
+    return null
+  }
+};
   
 export async function onRequest(context) {
   if (!context.params.img) 
@@ -59,19 +69,14 @@ export async function onRequest(context) {
 
   let image = `goggles-${format}-${size}.${format}`;
 
-  try {
-    let response = await fetch(`/images/${image}`); 
-    let buffer = await response.buffer(); 
-    let base64Image = buffer.toString('base64'); 
-  } catch (err) {
+  let base64str = getImage(image);
+
+  if (!base64str) 
     return response({
       status: 500,
       message: `Failed to fetch image: ${image}`,
-      error: err,
       valid_params,
     });
-  }
-  
   
   return response({
     url: `http://gogsplayground.pages.dev/images/${image}`,
