@@ -56,13 +56,23 @@ export function onRequest(context) {
     });
 
   if (format == 'jpg') format = 'jpeg';
+
+  let image = `goggles-${format}-${size}.${format}`;
+
+  let imageAsset = env.ASSETS.fetch(`/images/${image}`);
+
+  if (!imageAsset) return response({
+    status: 500,
+    message: `Image asset doesnt exist: ${image}`,
+  })
   
   return response({
-    url: `http://goggles.pages.dev/image/goggles-${format}-${size}.${format}`,
+    url: `http://goggles.pages.dev/image/${image}`,
     image: `data:image/${format};base64,{PLACEHOLDER}`,
     format: format,
     height: size,
     width: size,
+    type: typeof imageAsset,
     valid_params,
   });
 }
