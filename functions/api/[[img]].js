@@ -27,6 +27,18 @@ function getImage(image) {
     return null
   }
 };
+
+async function getImage(image) {
+  try {
+    const response = await fetch(`https://gogsplayground.pages.dev/images/${image}`);
+    const buffer = await response.arrayBuffer();
+    const base64String = buffer.toString('base64');
+    return base64String;
+  } catch (error) {
+    console.error('Error fetching image:', error);
+    return null;
+  }
+}
   
 export async function onRequest(context) {
   if (!context.params.img) 
@@ -71,7 +83,7 @@ export async function onRequest(context) {
 
   let image = `goggles-${format}-${size}.${format}`;
 
-  let base64str = getImage(image);
+  let base64str = await getImage(image);
 
   // if (!base64str) 
   //  return response({
