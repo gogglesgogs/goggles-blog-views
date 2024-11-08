@@ -20,7 +20,7 @@ function getImage(image) {
   let str = '';
   try {
     fetch(`/images/${image}`)
-      .then(res => response.buffer())
+      .then(res => response.arrayBuffer())
       .then(data => str = data.toString('base64'));
     return str
   } catch (err) {
