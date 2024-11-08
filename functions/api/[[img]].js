@@ -73,12 +73,12 @@ export async function onRequest(context) {
 
   let base64str = getImage(image);
 
-  if (!base64str) 
-    return response({
-      status: 500,
-      message: `Failed to fetch image: ${image}`,
-      valid_params,
-    });
+  // if (!base64str) 
+  //  return response({
+  //    status: 500,
+  //    message: `Failed to fetch image: ${image}`,
+  //    valid_params,
+  //  });
   
   return response({
     url: `http://gogsplayground.pages.dev/images/${image}`,
