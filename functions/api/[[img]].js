@@ -60,7 +60,7 @@ export async function onRequest(context) {
   let image = `goggles-${format}-${size}.${format}`;
 
   try {
-    let response = await fetch('/images/${}'); 
+    let response = await fetch(`/images/${image}`); 
     let buffer = await response.buffer(); 
     let base64Image = buffer.toString('base64'); 
   } catch (err) {
