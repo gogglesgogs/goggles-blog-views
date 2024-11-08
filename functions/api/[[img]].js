@@ -16,7 +16,7 @@ function response(res) {
   );
 };
 
-async function getImage(image) {
+function getImage(image) {
   let str = '';
   try {
     fetch(`/images/${image}`)
