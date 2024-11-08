@@ -17,10 +17,12 @@ function response(res) {
 };
 
 async function getImage(image) {
+  let str = '';
   try {
     fetch(`/images/${image}`)
       .then(res => response.buffer())
-      .then(data => return data.toString('base64'));
+      .then(data => str = data.toString('base64'));
+    return str
   } catch (err) {
     return null
   }
