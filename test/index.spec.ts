@@ -44,7 +44,7 @@ describe('worker tests', () => {
 
 		expect(response.status).toBe(200);
 		const data: res = await response.json();
-		expect(data.message).toBe('Returned view count successfully!');
+		expect(data.message).toBe('Get view count successfully!');
 		expect(data.viewcount).toBe(10);
 		expect(data.blogid).toBe('1');
 	});
@@ -57,7 +57,7 @@ describe('worker tests', () => {
 
 		expect(response.status).toBe(200);
 		const data: res = await response.json();
-		expect(data.message).toBe('Stored successfully!');
+		expect(data.message).toBe('Update view count successfully!');
 		expect(data.viewcount).toBe(11);
 		expect(data.blogid).toBe('1');
 		expect(mockEnv.BLOG_VIEWS.put).toHaveBeenCalledWith('1', '11');

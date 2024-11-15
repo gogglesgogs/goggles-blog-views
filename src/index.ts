@@ -5,7 +5,14 @@ export interface res {
 }
 
 function response(res?: res, opts?: ResponseInit): Response {
-	return new Response(JSON.stringify(res), { headers: { 'Content-Type': 'application/json' }, ...opts });
+	return new Response(JSON.stringify(res), {
+		headers: {
+			'Content-Type': 'application/json',
+			'Access-Control-Allow-Origin': 'https://goggles.pages.dev',
+			'Access-Control-Allow-Methods': 'GET, POST',
+		},
+		...opts,
+	});
 }
 
 export default {
@@ -35,7 +42,7 @@ export default {
 				}
 				return response(
 					{
-						message: `Returned view count successfully!`,
+						message: `Get view count successfully!`,
 						viewcount: parseInt(view),
 						blogid,
 					},
@@ -57,9 +64,9 @@ export default {
 				await env.BLOG_VIEWS.put(blogid, newView.toString());
 				return response(
 					{
-						message: 'Stored successfully!',
-						blogid,
+						message: 'Update view count successfully!',
 						viewcount: newView,
+						blogid,
 					},
 					{ status: 200 }
 				);
