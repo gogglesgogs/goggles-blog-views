@@ -4,11 +4,10 @@ export interface res {
 	viewcount?: number;
 }
 
-function response(res?: res, opts?: ResponseInit): Response {
+function response(res: res, opts?: ResponseInit): Response {
 	return new Response(JSON.stringify(res), {
 		headers: {
 			'Content-Type': 'application/json',
-			'Access-Control-Allow-Origin': 'https://goggles.pages.dev',
 			'Access-Control-Allow-Methods': 'GET, POST',
 		},
 		...opts,
