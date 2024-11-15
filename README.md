@@ -1,4 +1,4 @@
-# Goggles Blog Views API
+# Blog Views API
 
 A simple API that keeps track of blog views in my portfolio
 
