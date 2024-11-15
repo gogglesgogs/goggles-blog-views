@@ -8,8 +8,7 @@ function response(res: res, opts?: ResponseInit): Response {
 	return new Response(JSON.stringify(res), {
 		headers: {
 			'Content-Type': 'application/json',
-			//! SET TO PORTFOLIO DOMAIN
-			'Access-Control-Allow-Origin': 'https://goggles.pages.dev',
+			'Access-Control-Allow-Origin': '*',
 			'Access-Control-Allow-Methods': 'GET, POST',
 			'Access-Control-Allow-Headers': 'Content-Type',
 		},
