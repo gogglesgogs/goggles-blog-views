@@ -5,7 +5,7 @@ export interface res {
 }
 
 function response(res?: res, opts?: ResponseInit): Response {
-	return new Response(JSON.stringify(res), opts);
+	return new Response(JSON.stringify(res), { headers: { 'Content-Type': 'application/json' }, ...opts });
 }
 
 export default {
